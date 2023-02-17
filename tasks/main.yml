@@ -11,6 +11,7 @@
     - 'CISv8-4.8-IG3'
   block:
   - name: Configure squashfs module
+    become: true
     ansible.builtin.template:
       src: 'etc/modprobe.d/squashfs.conf.j2'
       dest: '/etc/modprobe.d/squashfs.conf'
@@ -21,6 +22,7 @@
       - ansible_os_family in ['Debian', 'RedHat']
 
   - name: Unload squashfs module
+    become: true
     ansible.builtin.modprobe:
       name: 'squashfs'
       state: absent
